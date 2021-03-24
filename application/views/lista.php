@@ -1,4 +1,4 @@
-    <?=$header?>
+    
     <div class="container">
         <!-- <button type="button" class="btn btn-success my-2" data-toggle="modal" data-target="#clubesModal">
             Incluir Novo
@@ -44,35 +44,39 @@
 
         <h1 class="text-center">Coleta - <?=Nome_Do_Mes($coleta->MES)?> de <?=$coleta->ANO?></h1>      
         
-        <table class="table table-bordered mt-5 tabela_lista">
+        <table class="table table-bordered mt-5 tabela_lista" style="font-size:12px;">
             <thead>
                 <tr>
                     <th>Clube</th>
                     <?php foreach($redes_sociais as $redesocial): ?>
                         <th><?=$redesocial->NOME?></th>                   
                     <?php endforeach;?>     
-                    <th>Acumulado</th>                 
+                    <th>Acumulado</th>
+                    <th>Porcentagem</th>                 
                 </tr>
             </thead>            
             <tbody>
                 <?php foreach($coletas_clube['coletas'] as $clube): ?>                    
                     <tr>                        
                         <td><a href="<?=base_url("clubes/historia/".$clube['CLUBE_ID'])?>"><?=$clube['CLUBE']?></a></td>
-                             <?php foreach($redes_sociais as $redesocial): ?>
-                                <td>
-                                    <?=$clube['REDES'][$redesocial->ID]?>                                                            
-                                </td>                            
-                            <?php endforeach; ?> 
+                        <?php foreach($redes_sociais as $redesocial): ?>
                             <td>
-                                <?=$clube['ACUMULADO']?>                                                            
-                            </td>                        
-                        </form>
+                                <?=$clube['REDES'][$redesocial->ID]?>                                                            
+                            </td>                            
+                        <?php endforeach; ?> 
+                        <td>
+                            <?=$clube['ACUMULADO']?>                                                            
+                        </td> 
+                        <td>
+                            <?=$clube['PORCENTAGEM']?>                                                            
+                        </td>                         
                     </tr>
                 <?php endforeach;?>
             </tbody>
         </table>
         <hr>
-        <table class="table table-bordered mt-5 tabela_lista">
+        
+        <table class="table table-bordered mt-5 tabela_lista" style="font-size:12px;">
             <thead>
                 <tr>
                     <th>Divisão</th>
@@ -99,6 +103,78 @@
                 <?php endforeach;?>
             </tbody>
         </table>
+        <hr>     
+
+           
+
+        <table class="table table-bordered mt-5" style="font-size:12px;">
+            <thead>
+                <tr>
+                    <th>Redes Sociais</th>
+                    <th>Valor</th>
+                    <th>Porcentagem</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach($coletas_clube['redes'] as $rede): ?>
+                    <?php if (!empty($rede->VALOR)):?>
+                        <tr>                        
+                            <td><?=$rede->NOME?></td>
+                            <td><?=$rede->VALOR?></td>                            
+                            <td class="text-right"><?=intval($rede->PORCENTAGEM);?>%</td>
+                        </tr>
+                    <?php endif;?>
+                <?php endforeach;?>
+                <tr>
+                    <td class='font-weight-bold'>TOTAL</td>
+                    <td colspan="2" class="text-right"><?=$coletas_clube['redes']['TOTAL']?></td>
+                <tr>
+            </tbody>
+        </table>
+        
+        <!--   
+
+        <table class="table table-bordered mt-5 tabela_lista" style="font-size:12px;">
+            <thead>
+                <tr>
+                    <th>Municípios</th>
+                    <th>População</th>
+                    <th>IDH</th>                    
+                    <?php foreach($redes_sociais as $redesocial): ?>
+                        <th><?=$redesocial->NOME?></th>                   
+                    <?php endforeach;?>     
+                    <th>Média</th>
+                    <th>Acumulado</th>      
+                    <th>Curtidas por 1000 Habitantes</th>             
+                </tr>
+            </thead>            
+            <tbody>
+                <?php foreach($coletas_clube['municipios'] as $municipio): ?>                    
+                    <tr>                        
+                        <td><?=$municipio->MUNICIPIO->MUNICIPIO?></td>
+                        <td><?=$municipio->MUNICIPIO->POPULACAO?></td>
+                        <td><?=$municipio->MUNICIPIO->IDH?></td>                        
+                        <?php foreach($redes_sociais as $redesocial): ?>
+                            <td>
+                                <?php $rede = $redesocial->ID ?>
+                                <?=$municipio->REDES->$rede?>                                                            
+                            </td>                            
+                        <?php endforeach; ?>                              
+                        <td>
+                            <?=intval($municipio->MEDIA);?>                                                            
+                        </td>    
+                        <td>
+                            <?=$municipio->ACUMULADO?>                                                            
+                        </td> 
+                        <td>
+                            <?=intval($municipio->CURTIDA_HABITANTE);?>
+                        </td>                    
+                        </form>
+                    </tr>
+                <?php endforeach;?>
+            </tbody>
+        </table>
+        -->
 
     </div>   
 </body>

@@ -36,7 +36,7 @@ class Coletas extends CI_Controller {
         $dados['municipios'] = $this->clubes_model->getMunicipios();
         $dados['redes_sociais'] = $this->clubes_model->getRedesSociais();
         $dados['coleta'] = $this->clubes_model->getColeta($id);
-        $dados['coletas_clube'] = $this->coletas_model->getColetasClube($id);
+        $dados['coletas_clube'] = $this->coletas_model->getColetasMes($id);
         
         $this->load->vars($dados);
 

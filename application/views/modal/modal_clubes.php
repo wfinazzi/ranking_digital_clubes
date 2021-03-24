@@ -33,6 +33,13 @@
                             <option value="<?=$item->ID?>"><?=$item->MUNICIPIO?></option>
                         <?php endforeach; ?>
                     </select>  
+                    
+                    <label for="municipio">Escudo</label>
+                    <select type="text" name="imagem" id="municipio" value="" class="form-control form-control-sm mb-2">
+                        <?php foreach($escudos as $item): ?>
+                            <option value="<?=$item?>" style="background-image:img/escudos/<?=$item?>"><?=$item?></option>
+                        <?php endforeach; ?>
+                    <select>
 
                     <label for="link_facebook">Facebook - Link</label>
                     <input type="text" name="link_facebook" id="link_facebook" value="" class="form-control form-control-sm mb-2">

@@ -21,12 +21,37 @@ class Clubes_model extends CI_Model {
         return $resultado;
     }
 
+    public function getClubesMunicipio($municipio){
+        $query = $this->db->get_where('clubes', array('MUNICIPIO' => $municipio));
+
+        $resultado = $query->result();
+
+        foreach($resultado as $item){
+            $item->COLETAS = $this->coletas_model->getColetasClube($item->ID);                           
+        }
+
+        return $resultado;
+    }
+
+    public function getClubesDivisao($divisao){
+        $query = $this->db->get_where('clubes', array('DIVISAO' => $divisao));
+
+        $resultado = $query->result();
+
+        foreach($resultado as $item){
+            $item->COLETAS = $this->coletas_model->getColetasClube($item->ID);    
+            $item->DIVISAO = $this->clubes_model->getDivisao($divisao);                         
+        }
+
+        return $resultado;
+    }
+
     public function incluir_clube($dados){
         
         $data = array(            
             'CLUBE' => $dados['clube'],
             'NOME_COMPLETO' => $dados['nome_completo'],
-            'IMAGEM' => $dados['divisao'],
+            'IMAGEM' => $dados['imagem'],
             'DIVISAO' => $dados['divisao'],
             'MUNICIPIO' => $dados['municipio'],
             'LINK_FACEBOOK' => $dados['link_facebook'],
@@ -44,6 +69,55 @@ class Clubes_model extends CI_Model {
         }else{
             return $this->db->insert('clubes', $data);
         }
+    }
+
+    public function getColetasClube($clube){
+
+        extract($dados);
+
+        if(isset($clube)){
+            $where_clube = " WHERE CRM.ID_CLUBE = $clube ";
+        }
+
+        $select = "SELECT CRM.* FROM clube_rede_mes CRM ".$where_clube;
+                      
+
+
+        return $dados;
+
+    }
+
+    public function getClubesRedes($clube){
+
+        extract($dados);
+
+        if(isset($clube)){
+            $where_clube = " WHERE C.ID = $clube ";
+        }
+
+        $select = "SELECT LINK_FACEBOOK, LINK_INSTAGRAM, LINK_YOUTUBE, LINK_TWITTER FROM clubes C ".$where_clube;
+                      
+        $query = $this->db->query($select);
+
+        $resultado = $query->result_array(); 
+
+        return $resultado;
+
+    }
+
+    public function getEscudos(){
+        $path = "img/escudos";
+        $diretorio = dir($path);
+        $escudos = [];
+       
+        while($arquivo = $diretorio -> read()){
+
+            array_push($escudos,$arquivo);
+            //echo "<option value='".$arquivo."'>".$arquivo."</option>";
+        }
+        $diretorio -> close();
+
+        return $escudos;
     }
 
     public function delete_clube($id){       

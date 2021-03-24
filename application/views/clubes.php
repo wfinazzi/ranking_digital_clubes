@@ -18,7 +18,7 @@
             
             <?php foreach($clubes as $clube): ?>
                 <tr>
-                    <td><a href="<?=base_url("clubes/historia/".$clube->ID)?>"><?=$clube->CLUBE?></a></td>
+                    <td><img src="img/escudos/<?=$clube->IMAGEM?>" alt="" style="width:20px; height:20px;"><a href="<?=base_url("clubes/clube/".$clube->ID)?>"><?=$clube->CLUBE?></a></td>
                     <td><?=$clube->NOME_COMPLETO?></td>
                     <td><?=$clube->DIVISAO?></td>
                     <td><?=$clube->MUNICIPIO?></td>

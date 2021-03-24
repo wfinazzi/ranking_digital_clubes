@@ -15,7 +15,7 @@ class Lista extends CI_Controller {
 	public function coleta()
 	{
 
-        $dados['header'] = $this->load->view("template/header");
+        
         
         $data = $this->input->post();
 
@@ -33,7 +33,8 @@ class Lista extends CI_Controller {
         
         $this->load->vars($dados);
 
-        $dados['modal'] = $this->load->view("modal/modal_clubes");  
+       
+        $this->load->view("template/header");
         $this->load->view('lista');
         $this->load->view("template/footer"); 		
     }

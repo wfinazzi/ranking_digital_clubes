@@ -7,6 +7,7 @@ class Clubes extends CI_Controller {
 	{
 		parent::__construct();
 		$clubes_model = $this->load->model('clubes_model');		
+        $coletas_model = $this->load->model('coletas_model');		
 		
 	}
 
@@ -19,6 +20,9 @@ class Clubes extends CI_Controller {
         $dados['clubes'] = $this->clubes_model->getClubes();
         $dados['divisoes'] = $this->clubes_model->getDivisoes();
         $dados['municipios'] = $this->clubes_model->getMunicipios();
+        $dados['escudos'] = $this->clubes_model->getEscudos();
+        
+        
         $this->load->vars($dados);
 
         $dados['modal'] = $this->load->view("modal/modal_clubes");  
@@ -80,9 +84,18 @@ class Clubes extends CI_Controller {
         redirect("/Clubes");
     }
     
-    public function historia($clube)
+    public function clube($clube)
 	{
 
+        $dados['clube'] = $this->clubes_model->getClube($clube);
+        $dados['municipio'] = $this->clubes_model->getMunicipio($dados['clube']->MUNICIPIO); 
+        $dados['clubes_municipio'] = $this->clubes_model->getClubesMunicipio($dados['municipio']->ID);
+        $dados['clubes_divisao'] = $this->clubes_model->getClubesDivisao($dados['clube']->DIVISAO);
+        $dados['clubes_redes'] = $this->clubes_model->getClubesRedes($clube);   
+       
+
+        $dados['redes_sociais'] = $this->clubes_model->getRedesSociais();
+        $dados['coletas'] = $this->coletas_model->getColetasClube($clube);
         $dados['header'] = $this->load->view("template/header");
         $dados['historia'] = $this->clubes_model->getHistoria($clube);   
         $dados['footer'] = $this->load->view("template/footer");      
