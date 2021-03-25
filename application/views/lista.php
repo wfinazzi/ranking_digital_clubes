@@ -44,6 +44,7 @@
 
         <h1 class="text-center">Coleta - <?=Nome_Do_Mes($coleta->MES)?> de <?=$coleta->ANO?></h1>      
         
+        
         <table class="table table-bordered mt-5 tabela_lista" style="font-size:12px;">
             <thead>
                 <tr>
@@ -58,7 +59,7 @@
             <tbody>
                 <?php foreach($coletas_clube['coletas'] as $clube): ?>                    
                     <tr>                        
-                        <td><a href="<?=base_url("clubes/historia/".$clube['CLUBE_ID'])?>"><?=$clube['CLUBE']?></a></td>
+                        <td><img src="<?=base_url('img/escudos/'.$clube['IMAGEM']);?>" alt="" style="width:20px; height:20px;"><a href="<?=base_url("clubes/clube/".$clube['CLUBE_ID'])?>"> <?=$clube['CLUBE']?></a></td>
                         <?php foreach($redes_sociais as $redesocial): ?>
                             <td>
                                 <?=$clube['REDES'][$redesocial->ID]?>                                                            
@@ -68,7 +69,7 @@
                             <?=$clube['ACUMULADO']?>                                                            
                         </td> 
                         <td>
-                            <?=$clube['PORCENTAGEM']?>                                                            
+                            <?=number_format($clube['PORCENTAGEM'], 3, '.', '');?>                                                            
                         </td>                         
                     </tr>
                 <?php endforeach;?>

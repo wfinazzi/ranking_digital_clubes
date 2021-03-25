@@ -1,12 +1,14 @@
 <?=$header?>
     <div class="container">           
-        <h3><img src="<?=base_url("img/escudos/".$clube->IMAGEM)?>" alt=""><?=$clube->CLUBE?></h3>
+        <h3><img src="<?=base_url("img/escudos/".$clube->IMAGEM)?>" alt=""> <?=$clube->CLUBE?></h3>
         <h4><?=$clube->NOME_COMPLETO?></h4>
         <a href="<?=base_url("Municipio/".$municipio->ID);?>"><h5><?=$municipio->MUNICIPIO?>-SP</h5></a>
         <div class="d-flex">                 
             <?php foreach($redes_sociais as $rede): ?>
                 <?php $rede_social = "LINK_".strtoupper($rede->NOME); ?>    
-                <a href="<?=$clubes_redes[0][$rede_social];?>" class="btn btn-outline-primary mr-2"><i class="fa fa-<?=strtolower($rede->NOME)?> fa-2x"></i></a>
+                <?php if($clubes_redes[0][$rede_social] !== ""): ?>
+                    <a href="<?=$clubes_redes[0][$rede_social];?>" class="btn btn-outline-primary mr-2"><i class="fa fa-<?=strtolower($rede->NOME)?> fa-2x"></i></a>
+                <?php endif;?>
             <?php endforeach;?>                             
         </div>
         <div id="accordion">
@@ -67,7 +69,7 @@
             <tbody>  
                 <?php foreach($clubes_municipio as $clube): ?>   
                     <tr>
-                        <td><a href="<?=base_url("clubes/clube/".$clube->ID)?>"><?=$clube->CLUBE?></a></td>
+                        <td><img src="<?=base_url("img/escudos/".$clube->IMAGEM)?>" alt="" style="width:20px; height:20px;"> <a href="<?=base_url("clubes/clube/".$clube->ID)?>"><?=$clube->CLUBE?></a></td>
                         <?php foreach($clube->COLETAS as $key => $coleta): ?>
                             <td><?=$coleta->MES?></td>
                             <?php foreach($coleta->REDES as $key => $rede): ?>
@@ -101,7 +103,7 @@
             <tbody>  
                 <?php foreach($clubes_divisao as $clube): ?>   
                     <tr>
-                        <td><a href="<?=base_url("clubes/clube/".$clube->ID)?>"><?=$clube->CLUBE?></a></td>
+                        <td><img src="<?=base_url("img/escudos/".$clube->IMAGEM)?>" alt="" style="width:20px; height:20px;"> <a href="<?=base_url("clubes/clube/".$clube->ID)?>"><?=$clube->CLUBE?></a></td>
                         <?php foreach($clube->COLETAS as $key => $coleta): ?>
                             <td><?=$clube->DIVISAO->TITULO?></td>
                             <td><?=$coleta->MES?></td>

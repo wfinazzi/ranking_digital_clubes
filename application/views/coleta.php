@@ -15,10 +15,11 @@
                 
                 <th>Confirmar Coleta</th>    
             </tr>
-            
+           
+           
             <?php foreach($clubes as $clube): ?>
                 <tr>
-                    <td><a href="<?=base_url("clubes/historia/".$clube->ID)?>"><?=$clube->CLUBE?></a></td>
+                    <td><img src="img/escudos/<?=$clube->IMAGEM?>" alt="" style="width:20px; height:20px;"><a href="<?=base_url("clubes/clube/".$clube->ID)?>"><?=$clube->CLUBE?></a></td>
                     <form action="<?=base_url("Coletas/incluir_coleta")?>" method="post">
                         <input type="hidden" name="clube" value="<?=$clube->ID?>">
                         <input type="hidden" name="coleta" value="<?=$coleta->ID?>">

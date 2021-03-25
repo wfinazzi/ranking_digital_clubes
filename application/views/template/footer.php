@@ -48,6 +48,7 @@
                 $("#clube").val(response.CLUBE);
                 $("#nome_completo").val(response.NOME_COMPLETO);
                 $("#divisao").val(response.DIVISAO);
+                $("#imagem").val(response.IMAGEM);
                 $("#municipio").val(response.MUNICIPIO); 
                 $("#link_facebook").val(response.LINK_FACEBOOK);
                 $("#link_instagram").val(response.LINK_INSTAGRAM);

@@ -46,7 +46,7 @@ class Coletas_model extends CI_Model {
         $where_municipios = (isset($municipio) && $municipio !== "") ? " AND C.MUNICIPIO = $municipio " : "";
 
 
-        $select = "SELECT CRM.*, C.ID as CLUBE_ID, C.CLUBE, D.ID AS DIVISAO, D.TITULO, M.ID AS MUNICIPIO_ID FROM clube_rede_mes CRM
+        $select = "SELECT CRM.*, C.ID as CLUBE_ID, C.CLUBE, C.IMAGEM, D.ID AS DIVISAO, D.TITULO, M.ID AS MUNICIPIO_ID FROM clube_rede_mes CRM
                       INNER JOIN clubes C ON CRM.ID_CLUBE = C.ID
                       INNER JOIN coletas COL ON CRM.ID_COLETA = COL.ID 
                       INNER JOIN municipios M ON M.ID = C.MUNICIPIO 
@@ -63,7 +63,8 @@ class Coletas_model extends CI_Model {
         //$total = [];
         foreach($resultado as $key => $item){                   
             $coletas[$item->ID_CLUBE]['REDES'][$item->ID_REDE] = $item->VALOR;
-            $coletas[$item->ID_CLUBE]['CLUBE'] = $item->CLUBE;
+            $coletas[$item->ID_CLUBE]['IMAGEM'] = $item->IMAGEM;
+            $coletas[$item->ID_CLUBE]['CLUBE'] = $item->CLUBE;            
             $coletas[$item->ID_CLUBE]['CLUBE_ID'] = $item->CLUBE_ID;
             $coletas[$item->ID_CLUBE]['ACUMULADO'] += $item->VALOR;
             $coletas[$item->ID_CLUBE]['PORCENTAGEM'] = ($coletas[$item->ID_CLUBE]['ACUMULADO'] / $total) * 100;

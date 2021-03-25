@@ -35,7 +35,7 @@
                     </select>  
                     
                     <label for="municipio">Escudo</label>
-                    <select type="text" name="imagem" id="municipio" value="" class="form-control form-control-sm mb-2">
+                    <select type="text" name="imagem" id="imagem" value="" class="form-control form-control-sm mb-2">
                         <?php foreach($escudos as $item): ?>
                             <option value="<?=$item?>" style="background-image:img/escudos/<?=$item?>"><?=$item?></option>
                         <?php endforeach; ?>
