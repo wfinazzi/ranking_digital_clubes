@@ -19,12 +19,16 @@ class Coletas_model extends CI_Model {
     public function getColetasMes($id){
         $query = $this->db->get_where('clube_rede_mes', array('ID_COLETA' => $id));
 
-        $resultado = $query->result();    
+        $resultado = $query->result();   
         
+        //print_r($resultado);
+        //exit;
+        $acumulado = 0;
         foreach($resultado as $item){
-            $coletas[$item->ID_CLUBE][$item->ID_REDE] = $item->VALOR;
-            $coletas[$item->ID_CLUBE]['ACUMULADO'] += $item->VALOR;
 
+            $acumulado += $item->VALOR;
+            $coletas[$item->ID_CLUBE][$item->ID_REDE] = $item->VALOR;
+            $coletas[$item->ID_CLUBE]['ACUMULADO'] = $acumulado;
         }       
         
 
@@ -154,19 +158,22 @@ class Coletas_model extends CI_Model {
         
         
         foreach($resultado as $item){
+
+            // print_r($item);
+            // exit;
             
             $mes_coleta = Nome_do_Mes($this->clubes_model->getColeta($item->ID_COLETA)->MES);
             $ano_coleta = $this->clubes_model->getColeta($item->ID_COLETA)->ANO;
             
-            $coletas[$item->ID_COLETA]->ID = $item->ID_COLETA;
-            $coletas[$item->ID_COLETA]->MES = $mes_coleta." de ".$ano_coleta;
+            $coletas[$item->ID_COLETA]['ID'] = $item->ID_COLETA;
+            $coletas[$item->ID_COLETA]['MES'] = $mes_coleta." de ".$ano_coleta;
             
             $rede = $item->ID_REDE;
             
             $acumulado += $item->VALOR;
-            $coletas[$item->ID_COLETA]->ACUMULADO = $acumulado;
-            $coletas[$item->ID_COLETA]->REDES->$rede->NOME = $this->clubes_model->getRedeSocial($item->ID_REDE)->NOME;
-            $coletas[$item->ID_COLETA]->REDES->$rede->VALOR = $item->VALOR;
+            $coletas[$item->ID_COLETA]['ACUMULADO'] = $acumulado;
+            $coletas[$item->ID_COLETA]['REDES'][$rede]['NOME'] = $this->clubes_model->getRedeSocial($item->ID_REDE)->NOME;
+            $coletas[$item->ID_COLETA]['REDES'][$rede]['VALOR'] = $item->VALOR;
             
             
         }
@@ -174,7 +181,7 @@ class Coletas_model extends CI_Model {
         foreach($resultado as $item){
             $rede = $item->ID_REDE;
             $porcentagem = ($item->VALOR / $acumulado) * 100;
-            $coletas[$item->ID_COLETA]->REDES->$rede->PORCENTAGEM = number_format($porcentagem, 2, '.', ' ');
+            $coletas[$item->ID_COLETA]['REDES'][$rede]['PORCENTAGEM']= number_format($porcentagem, 2, '.', ' ');
         }
 
         return $coletas;

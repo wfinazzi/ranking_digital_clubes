@@ -5,6 +5,7 @@
 
 <script>
 
+    $('.dropdown-toggle').dropdown()
     $(document).ready( function () {
         $('.tabela_lista').DataTable();
     } );

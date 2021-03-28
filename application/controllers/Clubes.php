@@ -7,7 +7,11 @@ class Clubes extends CI_Controller {
 	{
 		parent::__construct();
 		$clubes_model = $this->load->model('clubes_model');		
-        $coletas_model = $this->load->model('coletas_model');		
+        $coletas_model = $this->load->model('coletas_model');	
+        $user_data = $this->session->userdata();
+        
+        $this->dados['user_data'] = $user_data;
+        $this->load->vars($this->dados);
 		
 	}
 
@@ -15,74 +19,23 @@ class Clubes extends CI_Controller {
 	public function index()
 	{
 
-        $dados['header'] = $this->load->view("template/header");
-             
-        $dados['clubes'] = $this->clubes_model->getClubes();
-        $dados['divisoes'] = $this->clubes_model->getDivisoes();
-        $dados['municipios'] = $this->clubes_model->getMunicipios();
-        $dados['escudos'] = $this->clubes_model->getEscudos();
+       
+        $this->dados['clubes'] = $this->clubes_model->getClubes();
+        $this->dados['divisoes'] = $this->clubes_model->getDivisoes();
+        $this->dados['municipios'] = $this->clubes_model->getMunicipios();
+        $this->dados['escudos'] = $this->clubes_model->getEscudos();
         
         
-        $this->load->vars($dados);
+        $this->load->vars($this->dados);
 
-        $dados['modal'] = $this->load->view("modal/modal_clubes");  
-        $this->load->view('clubes');
+        $this->load->view("template/header");
+        $this->load->view('clubes');       
         $this->load->view("template/footer"); 
         // print_r($dados['divisoes']);
-        // exit;
-
-
-		
+        // exit;		
     }
 
-    public function incluir()
-	{
-        $dados = $this->input->post();
-        
-        if($this->clubes_model->incluir_clube($dados) == true){
-            $this->session->set_flashdata('mensagem', 'Clube incluído com sucesso !!!');
-            $this->session->set_flashdata('alert', 'success');
-        }else {
-            $this->session->set_flashdata('mensagem', 'Ocorreu um erro ao incluir o clube. Tente novamente mais tarde !!!');
-            $this->session->set_flashdata('alert', 'danger');
-        }
-
-        redirect("/Clubes");
-    }
-
-    public function editar($id)
-	{          
-        $dados['clube'] = $this->clubes_model->getClube($id);   
-        echo json_encode($dados['clube']);      
-    }
-
-    public function atualizar()
-	{
-        $dados = $this->input->post();
-        
-        if($this->clubes_model->update_clube($dados) == true){
-            $this->session->set_flashdata('mensagem', 'Clube editado com sucesso !!!');
-            $this->session->set_flashdata('alert', 'success');
-        }else {
-            $this->session->set_flashdata('mensagem', 'Ocorreu um erro ao editar o Clube. Tente novamente mais tarde !!!');
-            $this->session->set_flashdata('alert', 'danger');
-        }
-
-        redirect("/Clubes");
-    }
-
-    public function excluir($id)
-	{                
-        if($this->clubes_model->delete_clube($id) == true){
-            $this->session->set_flashdata('mensagem', 'Clube excluído com sucesso !!!');
-            $this->session->set_flashdata('alert', 'success');
-        }else {
-            $this->session->set_flashdata('mensagem', 'Ocorreu um erro ao excluir o Clube. Tente novamente mais tarde !!!');
-            $this->session->set_flashdata('alert', 'danger');
-        }
-
-        redirect("/Clubes");
-    }
+    
     
     public function clube($clube)
 	{
@@ -103,4 +56,5 @@ class Clubes extends CI_Controller {
 
 		$this->load->view('historia',$dados);
 	}
+    
 }

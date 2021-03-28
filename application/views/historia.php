@@ -1,4 +1,4 @@
-<?=$header?>
+
     <div class="container">           
         <h3><img src="<?=base_url("img/escudos/".$clube->IMAGEM)?>" alt=""> <?=$clube->CLUBE?></h3>
         <h4><?=$clube->NOME_COMPLETO?></h4>
@@ -34,8 +34,8 @@
                 <tr>   
                     <th>Coleta</th>             
                     <?php foreach($coletas as $coleta): ?>
-                        <?php foreach($coleta->REDES as $rede): ?>
-                            <th><?=$rede->NOME?> (%)</th>
+                        <?php foreach($coleta['REDES'] as $rede): ?>
+                            <th><?=$rede['NOME']?> (%)</th>
                         <?php endforeach;?>
                     <?php endforeach;?> 
                     <th>Acumulado</th>                                 
@@ -43,12 +43,12 @@
             </thead>    
             <tbody>                
                 <?php foreach($coletas as $coleta): ?>
-                    <td><?=$coleta->MES?></td>
-                    <?php foreach($coleta->REDES as $rede): ?>
-                        <td><?=$rede->VALOR?> (<?=$rede->PORCENTAGEM?>%)</td>
+                    <td><?=$coleta['MES']?></td>
+                    <?php foreach($coleta['REDES'] as $rede): ?>
+                        <td><?=$rede['VALOR']?> (<?=$rede['PORCENTAGEM']?>%)</td>
                     <?php endforeach;?>
                 <?php endforeach;?>
-                <td><?=$coleta->ACUMULADO?></td>
+                <td><?=$coleta['ACUMULADO']?></td>
             </tbody>      
         </table>
         
@@ -71,11 +71,11 @@
                     <tr>
                         <td><img src="<?=base_url("img/escudos/".$clube->IMAGEM)?>" alt="" style="width:20px; height:20px;"> <a href="<?=base_url("clubes/clube/".$clube->ID)?>"><?=$clube->CLUBE?></a></td>
                         <?php foreach($clube->COLETAS as $key => $coleta): ?>
-                            <td><?=$coleta->MES?></td>
-                            <?php foreach($coleta->REDES as $key => $rede): ?>
-                                <td><?=$rede->VALOR?></td>
+                            <td><?=$coleta['MES']?></td>
+                            <?php foreach($coleta['REDES'] as $key => $rede): ?>
+                                <td><?=$rede['VALOR']?></td>
                             <?php endforeach;?>
-                            <td><?=$coleta->ACUMULADO?></td>
+                            <td><?=$coleta['ACUMULADO']?></td>
                         <?php endforeach;?>
                     </tr>
                 <?php endforeach;?> 
@@ -106,11 +106,11 @@
                         <td><img src="<?=base_url("img/escudos/".$clube->IMAGEM)?>" alt="" style="width:20px; height:20px;"> <a href="<?=base_url("clubes/clube/".$clube->ID)?>"><?=$clube->CLUBE?></a></td>
                         <?php foreach($clube->COLETAS as $key => $coleta): ?>
                             <td><?=$clube->DIVISAO->TITULO?></td>
-                            <td><?=$coleta->MES?></td>
-                            <?php foreach($coleta->REDES as $key => $rede): ?>
-                                <td><?=$rede->VALOR?></td>
+                            <td><?=$coleta['MES']?></td>
+                            <?php foreach($coleta['REDES'] as $key => $rede): ?>
+                                <td><?=$rede['VALOR']?></td>
                             <?php endforeach;?>
-                            <td><?=$coleta->ACUMULADO?></td>
+                            <td><?=$coleta['ACUMULADO']?></td>
                         <?php endforeach;?>
                     </tr>
                 <?php endforeach;?> 

@@ -7,7 +7,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="<?=base_url("RedesSociais/incluir")?>" method="post">
+            <form action="<?=base_url("admin/RedesSociais/incluir")?>" method="post">
                 <div class="modal-body">
                     <input type="hidden" name="id" id="id" value="">
                     <label for="nome">Nome</label>

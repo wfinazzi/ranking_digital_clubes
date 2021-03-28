@@ -1,11 +1,5 @@
-    <?=$header?>
     <div class="container">
-        <button type="button" class="btn btn-success my-2" data-toggle="modal" data-target="#clubesModal">
-            Incluir Novo
-        </button> 
-
-        <h1 class="text-center">Coleta - <?=Nome_Do_Mes($coleta->MES)?> de <?=$coleta->ANO?></h1>      
-        
+        <h1 class="text-center">Coleta - <?=Nome_Do_Mes($coleta->MES)?> de <?=$coleta->ANO?></h1>              
         <table class="table table-bordered mt-5">
             <tr>
                 <th>Clube</th>
@@ -19,7 +13,7 @@
            
             <?php foreach($clubes as $clube): ?>
                 <tr>
-                    <td><img src="img/escudos/<?=$clube->IMAGEM?>" alt="" style="width:20px; height:20px;"><a href="<?=base_url("clubes/clube/".$clube->ID)?>"><?=$clube->CLUBE?></a></td>
+                    <td><img src="<?=base_url("img/escudos/".$clube->IMAGEM);?>" alt="" style="width:20px; height:20px;"><a href="<?=base_url("clubes/clube/".$clube->ID)?>"><?=$clube->CLUBE?></a></td>
                     <form action="<?=base_url("Coletas/incluir_coleta")?>" method="post">
                         <input type="hidden" name="clube" value="<?=$clube->ID?>">
                         <input type="hidden" name="coleta" value="<?=$coleta->ID?>">
@@ -37,8 +31,7 @@
                 </tr>
             <?php endforeach;?>
         </table>
-    </div>
-    <?=$modal?>   
+    </div>      
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>

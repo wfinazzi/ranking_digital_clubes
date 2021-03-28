@@ -7,7 +7,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="<?=base_url("Coletas/incluir")?>" method="post">
+            <form action="<?=base_url("admin/Coletas/incluir")?>" method="post">
                 <div class="modal-body">
                     <input type="hidden" name="id" id="id" value="">
                     <label for="divisao">Mês</label>

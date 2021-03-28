@@ -89,7 +89,7 @@ class Clubes_model extends CI_Model {
 
     public function getClubesRedes($clube){
 
-        extract($dados);
+        //extract($dados);
 
         if(isset($clube)){
             $where_clube = " WHERE C.ID = $clube ";

@@ -21,7 +21,7 @@
                     <a class="nav-link" href="<?=base_url('')?>">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?=base_url('Clubes')?>">Clubes</a>
+                    <a class="nav-link" href="<?=base_url('clubes')?>">Clubes</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<?=base_url('Municipios')?>">Municípios</a>
@@ -36,11 +36,15 @@
                     <a class="nav-link" href="<?=base_url('Coletas')?>">Coletas</a>
                 </li>
             </ul>
-        </div>
+        </div> 
+        <div>             
+            <a class="btn btn-primary" href="<?=base_url('Google_Login/Login')?>">Administrar</a>
+        </div>       
     </nav>
     <?php if($this->session->flashdata('mensagem')){ ?>
         <div class="alert alert-<?= $this->session->flashdata('alert')?>" role="alert">
             <?=$this->session->flashdata('mensagem')?>
+            <?php unset($_SESSION['mensagem']); ?>
         </div>
     <?php } ?>
     
