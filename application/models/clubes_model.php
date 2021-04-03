@@ -8,8 +8,13 @@ class Clubes_model extends CI_Model {
         return $query->row();
     }
 
-    public function getClubes(){
-        $query = $this->db->get('clubes');
+    public function getClubes($divisao = ""){
+
+        if($divisao !== ""){
+            $query = $this->db->get_where('clubes', array('DIVISAO' => $divisao));            
+        }else{
+            $query = $this->db->get('clubes');
+        }        
 
         $resultado = $query->result();
 
@@ -30,7 +35,42 @@ class Clubes_model extends CI_Model {
             $item->COLETAS = $this->coletas_model->getColetasClube($item->ID);                           
         }
 
+        foreach($resultado as $item){
+            $coletas[$item->ID]['CLUBE'] = $item->CLUBE;
+            foreach($item->COLETAS as $key => $coleta){
+                $coletas[$item->ID]['ACUMULADOS'][$key] = $coleta['ACUMULADO'];
+            }
+        }
+
+        // echo "<pre>";
+        // print_r($coletas);
+        // print_r($resultado);
+        // echo "</pre>";
+
         return $resultado;
+    }
+
+    public function getClubesMunicipioGrafico($municipio){
+        $query = $this->db->get_where('clubes', array('MUNICIPIO' => $municipio));
+
+        $resultado = $query->result();
+
+        foreach($resultado as $item){
+            $item->COLETAS = $this->coletas_model->getColetasClube($item->ID);                           
+        }
+
+        foreach($resultado as $item){
+            $coletas[$item->ID]['CLUBE'] = $item->CLUBE;
+            foreach($item->COLETAS as $key => $coleta){
+                $coletas[$item->ID]['ACUMULADOS'][$key] = $coleta['ACUMULADO'];
+            }
+        }
+
+        // echo "<pre>";        
+        // print_r($resultado);
+        // echo "</pre>";
+
+        return $coletas;
     }
 
     public function getClubesDivisao($divisao){
@@ -43,7 +83,37 @@ class Clubes_model extends CI_Model {
             $item->DIVISAO = $this->clubes_model->getDivisao($divisao);                         
         }
 
+        
+
+        
+
+
         return $resultado;
+    }
+
+    public function getClubesDivisaoGrafico($divisao){
+        $query = $this->db->get_where('clubes', array('DIVISAO' => $divisao));
+
+        $resultado = $query->result();
+
+        foreach($resultado as $item){
+            $item->COLETAS = $this->coletas_model->getColetasClube($item->ID);    
+            $item->DIVISAO = $this->clubes_model->getDivisao($divisao);                         
+        }
+
+        foreach($resultado as $item){
+            $coletas[$item->ID]['CLUBE'] = $item->CLUBE;
+            foreach($item->COLETAS as $key => $coleta){
+                $coletas[$item->ID]['COLETAS'][$key] = $coleta['ACUMULADO'] / 1000;
+            }
+        }
+
+        // echo "<pre>";
+        // print_r($coletas);
+        // print_r($resultado);
+        // echo "</pre>";
+
+        return $coletas;
     }
 
     public function incluir_clube($dados){

@@ -34,6 +34,7 @@ class Coletas extends CI_Controller {
 
         $this->dados['header'] = $this->load->view("template/header_admin");
              
+       
         $this->dados['clubes'] = $this->clubes_model->getClubes();
         $this->dados['divisoes'] = $this->clubes_model->getDivisoes();
         $this->dados['municipios'] = $this->clubes_model->getMunicipios();
@@ -47,6 +48,26 @@ class Coletas extends CI_Controller {
         $this->load->view('coleta');
         $this->load->view("template/footer"); 		
     }
+
+    public function coletas_clube($id){
+
+        $coletas_clube = $this->coletas_model->getColetasClubeGrafico($id);
+        echo json_encode($coletas_clube);
+
+    }    
+
+    public function clube_municipio($municipio){
+
+        $clubes_municipio = $this->clubes_model->getClubesMunicipioGrafico($municipio);
+        echo json_encode($clubes_municipio);
+    }
+
+    public function clube_divisao($divisao){
+
+        $clubes_municipio = $this->clubes_model->getClubesDivisaoGrafico($divisao);
+        echo json_encode($clubes_municipio);
+    }
+    
 
     
    

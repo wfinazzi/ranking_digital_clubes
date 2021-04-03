@@ -1,10 +1,13 @@
-    <?=$header?>
     <div class="container">
         <button type="button" class="btn btn-success my-2" data-toggle="modal" data-target="#clubesModal">
             Incluir Novo
         </button> 
 
-        <h1 class="text-center">Coleta - <?=Nome_Do_Mes($coleta->MES)?> de <?=$coleta->ANO?></h1>      
+        <h1 class="text-center">Coleta - <?=Nome_Do_Mes($coleta->MES)?> de <?=$coleta->ANO?></h1>         
+
+        <?php foreach($divisoes as $div): ?>
+            <a class="btn btn-secondary" href="<?=base_url('admin/Coletas/coleta/'.$coleta->ID."/".$div->ID)?>"><?=$div->TITULO;?></a>            
+        <?php endforeach; ?>    
         
         <table class="table table-bordered mt-5">
             <tr>
@@ -17,10 +20,11 @@
             </tr>
            
            
+           
             <?php foreach($clubes as $clube): ?>
                 <tr>
-                    <td><img src="img/escudos/<?=$clube->IMAGEM?>" alt="" style="width:20px; height:20px;"><a href="<?=base_url("clubes/clube/".$clube->ID)?>"><?=$clube->CLUBE?></a></td>
-                    <form action="<?=base_url("Coletas/incluir_coleta")?>" method="post">
+                    <td><img src="<?=base_url('img/escudos/'.$clube->IMAGEM)?>" alt="" style="width:20px; height:20px;"><a href="<?=base_url("clubes/clube/".$clube->ID)?>"> <?=$clube->CLUBE?></a></td>
+                    <form action="<?=base_url("admin/Coletas/incluir_coleta/".$divisao)?>" method="post">
                         <input type="hidden" name="clube" value="<?=$clube->ID?>">
                         <input type="hidden" name="coleta" value="<?=$coleta->ID?>">
                         <?php foreach($redes_sociais as $redesocial): ?>

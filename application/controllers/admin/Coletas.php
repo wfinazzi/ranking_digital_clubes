@@ -25,27 +25,28 @@ class Coletas extends CI_Controller {
 
         $this->load->vars($this->dados);
 
-        $this->load->view('coletas');
+        $this->load->view('admin/coletas');
         $this->dados['modal'] = $this->load->view("modal/modal_coletas");    
         $this->dados['footer'] = $this->load->view("template/footer");   		
     }
 
-    public function coleta($id)
+    public function coleta($id,$divisao = null)
 	{
 
         $this->dados['header'] = $this->load->view("template/header_admin");
              
-        $this->dados['clubes'] = $this->clubes_model->getClubes();
+        $this->dados['clubes'] = $this->clubes_model->getClubes($divisao);
         $this->dados['divisoes'] = $this->clubes_model->getDivisoes();
         $this->dados['municipios'] = $this->clubes_model->getMunicipios();
         $this->dados['redes_sociais'] = $this->clubes_model->getRedesSociais();
         $this->dados['coleta'] = $this->clubes_model->getColeta($id);
         $this->dados['coletas_clube'] = $this->coletas_model->getColetasMes($id);
+        $this->dados['divisao'] = $divisao;
         
         $this->load->vars($this->dados);
 
         $this->dados['modal'] = $this->load->view("modal/modal_clubes");  
-        $this->load->view('coleta');
+        $this->load->view('admin/coleta');
         $this->load->view("template/footer"); 		
     }
 
@@ -64,7 +65,7 @@ class Coletas extends CI_Controller {
         redirect("/admin/Coletas");
     }
 
-    public function incluir_coleta()
+    public function incluir_coleta($divisao)
 	{
         $this->dados = $this->input->post();        
 
@@ -78,7 +79,7 @@ class Coletas extends CI_Controller {
             $this->session->set_flashdata('alert', 'danger');
         }
 
-        redirect("/admin/Coletas/coleta/".$this->dados['coleta']);
+        redirect("/admin/Coletas/coleta/".$this->dados['coleta']."/".$divisao);
     }
 
     public function editar($id)

@@ -48,13 +48,16 @@ class Clubes extends CI_Controller {
        
 
         $dados['redes_sociais'] = $this->clubes_model->getRedesSociais();
-        $dados['coletas'] = $this->coletas_model->getColetasClube($clube);
-        $dados['header'] = $this->load->view("template/header");
-        $dados['historia'] = $this->clubes_model->getHistoria($clube);   
-        $dados['footer'] = $this->load->view("template/footer");      
+        $dados['coletas'] = $this->coletas_model->getColetasClube($clube);        
+        $dados['historia'] = $this->clubes_model->getHistoria($clube);              
 
-
+        $this->load->view("template/header");
 		$this->load->view('historia',$dados);
+        $this->load->view("template/footer");
+        $this->load->view("chart");
+        $this->load->view("bar_chart");
+        $this->load->view("line_chart");
+        $this->load->view("line_chart_divisao");
 	}
     
 }

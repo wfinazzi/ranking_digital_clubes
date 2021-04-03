@@ -24,7 +24,7 @@ class Municipios extends CI_Controller {
         $this->load->vars($this->dados);        
 
         $this->load->view("template/header_admin");
-        $this->load->view('municipios');
+        $this->load->view('admin/municipios');
         $this->load->view("modal/modal_municipios");    
         $this->load->view("template/footer"); 
     

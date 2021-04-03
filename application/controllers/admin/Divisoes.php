@@ -22,7 +22,7 @@ class Divisoes extends CI_Controller {
         
        
         $this->load->view("template/header_admin");
-        $this->load->view('divisoes',$this->dados);             
+        $this->load->view('admin/divisoes',$this->dados);             
         $this->load->view("modal/modal_divisoes");
         $this->load->view("template/footer");   	
         

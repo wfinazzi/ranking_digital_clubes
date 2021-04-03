@@ -171,18 +171,66 @@ class Coletas_model extends CI_Model {
             $rede = $item->ID_REDE;
             
             $acumulado += $item->VALOR;
-            $coletas[$item->ID_COLETA]['ACUMULADO'] = $acumulado;
+            $coletas[$item->ID_COLETA]['ACUMULADO'] += $item->VALOR;
             $coletas[$item->ID_COLETA]['REDES'][$rede]['NOME'] = $this->clubes_model->getRedeSocial($item->ID_REDE)->NOME;
             $coletas[$item->ID_COLETA]['REDES'][$rede]['VALOR'] = $item->VALOR;
             
             
-        }
+        }        
 
         foreach($resultado as $item){
             $rede = $item->ID_REDE;
             $porcentagem = ($item->VALOR / $acumulado) * 100;
             $coletas[$item->ID_COLETA]['REDES'][$rede]['PORCENTAGEM']= number_format($porcentagem, 2, '.', ' ');
         }
+
+        return $coletas;
+
+    }
+
+    public function getColetasClubeGrafico($clube){
+
+        //extract($dados);
+
+        if(isset($clube)){
+            $where_clube = " WHERE CRM.ID_CLUBE = $clube ";
+        }
+
+        $select = "SELECT CRM.* FROM clube_rede_mes CRM ".$where_clube;
+
+        $query = $this->db->query($select);
+
+        $resultado = $query->result(); 
+
+        $acumulado = 0;
+        
+        
+        foreach($resultado as $item){
+
+            // print_r($item);
+            // exit;
+            
+            $mes_coleta = Nome_do_Mes($this->clubes_model->getColeta($item->ID_COLETA)->MES);
+            $ano_coleta = $this->clubes_model->getColeta($item->ID_COLETA)->ANO;
+            
+            $coletas['ID'][$item->ID_COLETA] = $item->ID_COLETA;
+            $coletas['MESES'][$item->ID_COLETA] = $mes_coleta." de ".$ano_coleta;
+            
+            $rede = $item->ID_REDE;
+            
+            $acumulado += $item->VALOR;
+            $coletas['COLETAS'][$item->ID_REDE]['VALORES'][$item->ID_COLETA] = $item->VALOR;
+            $coletas['COLETAS'][$item->ID_REDE]['NOME'] = $this->clubes_model->getRedeSocial($item->ID_REDE)->NOME;
+            //$coletas[$item->ID_REDE][$item->ID_COLETA]['REDES'][$rede]['VALOR'] = $item->VALOR;
+            
+            
+        }
+
+        // foreach($resultado as $item){
+        //     $rede = $item->ID_REDE;
+        //     $porcentagem = ($item->VALOR / $acumulado) * 100;
+        //     $coletas[$item->ID_COLETA]['REDES'][$rede]['PORCENTAGEM']= number_format($porcentagem, 2, '.', ' ');
+        // }
 
         return $coletas;
 

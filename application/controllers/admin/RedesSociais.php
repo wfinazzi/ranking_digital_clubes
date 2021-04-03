@@ -26,7 +26,7 @@ class RedesSociais extends CI_Controller {
         $this->load->vars($this->dados);
         
         $this->load->view("template/header_admin");
-        $this->load->view('redes_sociais');
+        $this->load->view('admin/redes_sociais');
         $this->load->view("modal/modal_redes_sociais"); 
         $this->load->view("template/footer");  
        
