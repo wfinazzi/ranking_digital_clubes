@@ -19,13 +19,13 @@
     </head>
 
     <body class="text-center">
-        <form class="form-signin">
+        <form class="form-signin" method="post" action="<?=base_url("Login/efetuarLogin");?>">
             <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
             <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
             <label for="inputEmail" class="sr-only">Email address</label>
-            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+            <input type="email" id="inputEmail" class="form-control" name="email" placeholder="Email address" required autofocus>
             <label for="inputPassword" class="sr-only">Password</label>
-            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>                     
+            <input type="password" id="inputPassword" class="form-control" name="senha" placeholder="Password" required>                     
             <div class="panel panel-default">
             <?php if(($this->session->userdata('access_token'))){
                //print_r($this->session->userdata());
@@ -44,8 +44,9 @@
                 }
             ?>
             </div>
-            <a href="<?=$link?>" class="btn btn-lg btn-primary btn-block">Login</a>
-            <a href="<?=base_url("Google_Login/logout");?>" class="btn btn-lg btn-primary btn-block">Logout</a>
+            <a href="<?=base_url("login/solicitar_acesso")?>" >Não sou cadastrado ainda. Cadastrar ?</a><br>
+            <button class="btn btn-lg btn-primary btn-block" type="submit"><i class="fa fa-arrow-right"></i> Acessar</button>
+            <a href="<?=$link?>" class="btn btn-lg btn-danger btn-block">Google Login</a>            
             <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
         </form>
     </body>

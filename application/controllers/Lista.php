@@ -13,9 +13,7 @@ class Lista extends CI_Controller {
 
 	
 	public function coleta()
-	{
-
-        
+	{        
         
         $data = $this->input->post();
 

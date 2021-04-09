@@ -9,7 +9,7 @@ class Google_login_model extends CI_Model {
         $query = $this->db->get('usuarios');
         
         if($query->num_rows() > 0){
-            return true;        
+            return $query->row();        
         }else {
             return false;
         }
@@ -21,7 +21,7 @@ class Google_login_model extends CI_Model {
     }
 
     function insert_user_data($data){
-        $this->db->insert('usuarios',$data);
+        $this->db->insert('candidatos',$data);
     }
 }
 ?>

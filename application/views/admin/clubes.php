@@ -1,34 +1,48 @@
    
     <div class="container">
-        <button type="button" class="btn btn-success my-2" data-toggle="modal" data-target="#clubesModal">
-            Incluir Novo
-        </button> 
-        <table class="table table-sm table-bordered mt-5" style="font-size:12px;">
-            <tr>
-                <th>Clube</th>
-                <th>Nome Completo</th>
-                <th>Divisão</th>
-                <th>Município</th>
-                <th>Facebook</th>
-                <th>Instagram</th>
-                <th>Youtube</th>
-                <th>Twitter</th>
-                <th>Editar/Excluir</th>    
-            </tr>
-            
-            <?php foreach($clubes as $clube): ?>
+        <h1 class="text-center">Clubes</h1>
+        <hr>
+        <?php if($user_data['perfil'] == 1): ?>
+            <button type="button" class="btn btn-success my-2" data-toggle="modal" data-target="#clubesModal">
+                <i class="fa fa-plus mr-2"></i>Incluir Novo
+            </button> 
+        <?php endif; ?>
+        <table class="table table-sm table-bordered tabela_lista mt-5" style="font-size:12px;">
+            <thead>
                 <tr>
-                    <td><img src="<?=base_url("img/escudos/".$clube->IMAGEM)?>" style="width:20px; height:20px;"><a href="<?=base_url("clubes/clube/".$clube->ID)?>"><?=$clube->CLUBE?></a></td>
-                    <td><?=$clube->NOME_COMPLETO?></td>
-                    <td><?=$clube->DIVISAO?></td>
-                    <td><?=$clube->MUNICIPIO?></td>
-                    <td><?php if(isset($clube->LINK_FACEBOOK) && $clube->LINK_FACEBOOK !== ""):?><a href="<?=$clube->LINK_FACEBOOK?>" class="btn btn-sm btn-primary" style="font-size:12px;">Facebook</a><?php endif;?></td>
-                    <td><?php if(isset($clube->LINK_INSTAGRAM) && $clube->LINK_INSTAGRAM !== ""):?><a href="<?=$clube->LINK_INSTAGRAM?>" class="btn btn-sm btn-warning" style="font-size:12px;">Instagram</a><?php endif;?></td>
-                    <td><?php if(isset($clube->LINK_TWITTER) && $clube->LINK_TWITTER !== "" ):?><a href="<?=$clube->LINK_TWITTER?>" class="btn btn-sm btn-info" style="font-size:12px;">Twitter</a><?php endif;?></td>
-                    <td><?php if(isset($clube->LINK_YOUTUBE) && $clube->LINK_YOUTUBE !== ""):?><a href="<?=$clube->LINK_YOUTUBE?>" class="btn btn-sm btn-danger" style="font-size:12px;">Youtube</a><?php endif;?></td>
-                    <td><a data-toggle="modal" data-target="#clubesModal" class="editar_clube" data-clube="<?=$clube->ID?>">Editar</a> - <a href="<?=base_url('admin/clubes/excluir/'.$clube->ID)?>">Excluir</a></td>               
+                    <th>Clube</th>
+                    <th>Nome Completo</th>
+                    <th>Divisão</th>
+                    <th>Município</th>
+                    <th>Facebook</th>
+                    <th>Instagram</th>               
+                    <th>Twitter</th>
+                    <th>Youtube</th>
+                    <?php if($user_data['perfil'] == 1): ?>
+                        <th>Editar/Excluir</th>    
+                    <?php endif; ?>
                 </tr>
-            <?php endforeach;?>
+            </thead>
+            <tbody>            
+                <?php foreach($clubes as $clube): ?>
+                    <tr>
+                        <td><img src="<?=base_url("img/escudos/".$clube->IMAGEM)?>" style="width:20px; height:20px;" class="mr-2"><a href="<?=base_url("clubes/clube/".$clube->ID)?>"><?=$clube->CLUBE?></a></td>
+                        <td><?=$clube->NOME_COMPLETO?></td>
+                        <td><?=$clube->DIVISAO?></td>
+                        <td><?=$clube->MUNICIPIO?></td>
+                        <td class="text-center"><?php if(isset($clube->LINK_FACEBOOK) && $clube->LINK_FACEBOOK !== ""):?><a href="<?=$clube->LINK_FACEBOOK?>" class="btn btn-sm btn-primary" style="font-size:12px;"><i class="fa fa-facebook"></i></a><?php endif;?></td>
+                        <td class="text-center"><?php if(isset($clube->LINK_INSTAGRAM) && $clube->LINK_INSTAGRAM !== ""):?><a href="<?=$clube->LINK_INSTAGRAM?>" class="btn btn-sm btn-warning" style="font-size:12px;"><i class="fa fa-instagram"></i></a><?php endif;?></td>
+                        <td class="text-center"><?php if(isset($clube->LINK_TWITTER) && $clube->LINK_TWITTER !== "" ):?><a href="<?=$clube->LINK_TWITTER?>" class="btn btn-sm btn-info" style="font-size:12px;"><i class="fa fa-twitter"></i></a><?php endif;?></td>
+                        <td class="text-center"><?php if(isset($clube->LINK_YOUTUBE) && $clube->LINK_YOUTUBE !== ""):?><a href="<?=$clube->LINK_YOUTUBE?>" class="btn btn-sm btn-danger" style="font-size:12px;"><i class="fa fa-youtube"></i></a><?php endif;?></td>
+                        <?php if($user_data['perfil'] == 1): ?>
+                            <td class="text-center">
+                                <a data-toggle="modal" data-target="#clubesModal" class="editar_clube btn btn-sm btn-secondary" data-clube="<?=$clube->ID?>"><i class="fa fa-edit"></i></a>  
+                                <a href="<?=base_url('admin/clubes/excluir/'.$clube->ID)?>" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                            </td>               
+                        <?php endif; ?>
+                    </tr>
+                <?php endforeach;?>
+            </tbody>
         </table>
     </div>   
 </body>

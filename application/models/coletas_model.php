@@ -81,14 +81,17 @@ class Coletas_model extends CI_Model {
         }
 
         foreach($resultado as $item){             
-            $redes_sociais[$item->ID_REDE]->VALOR += $item->VALOR;  
-            $redes_sociais[$item->ID_REDE]->NOME = $this->clubes_model->getRedeSocial($item->ID_REDE)->NOME;
+            $redes_sociais[$item->ID_REDE]['VALOR'] += $item->VALOR;  
+            $redes_sociais[$item->ID_REDE]['NOME'] = $this->clubes_model->getRedeSocial($item->ID_REDE)->NOME;
             $redes_sociais['TOTAL'] += $item->VALOR;  
         }
 
-        foreach($redes_sociais as $key => $item){     
-            $redes_sociais[$key]->PORCENTAGEM = ($redes_sociais[$key]->VALOR / $total) * 100;
-        }
+        // $porcentagem = array();
+        // foreach($redes_sociais as $key => $item){ 
+        //      //$redes_sociais[$key]['PORCENTAGEM'] = array();    
+        //      $porcentagem = $redes_sociais[$key]['VALOR'] * 100;
+        //      $redes_sociais[$key]['PORCENTAGEM'] = $porcentagem;
+        //  }
 
         
 

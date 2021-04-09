@@ -12,6 +12,12 @@ class RedesSociais extends CI_Controller {
         
         $this->dados['user_data'] = $user_data;
         $this->load->vars($this->dados);
+
+        $login_model = $this->load->model('login_model');		
+
+        if($this->login_model->is_logged_in() == false){
+            redirect("Login");
+        }
 		
 	}
 

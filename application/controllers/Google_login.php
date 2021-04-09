@@ -7,6 +7,7 @@ class Google_Login extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('google_login_model');
+        $perfil_status_model = $this->load->model('perfil_status_model');
 		
 	}
 
@@ -41,14 +42,20 @@ class Google_Login extends CI_Controller {
 
                 $current_datetime = date('Y-m-d H:i:s');
 
-                if($this->google_login_model->is_already_register($data['id'])){
+                $usuario = $this->google_login_model->is_already_register($data['id']);
+
+                if($usuario){
+
                     //update data
                     $user_data = array(
                         'first_name' => $data['given_name'],
                         'last_name' => $data['family_name'],
                         'email_address' => $data['email'],
                         'profile_picture' => $data['picture'],
-                        'updated_at' => $current_datetime
+                        'updated_at' => $current_datetime,
+                        'perfil' => $usuario->perfil,
+                        'perfil_nome' => $this->perfil_status_model->get_perfil($usuario->perfil)->PERFIL,
+                        'logged_in' => true		
                     );
 
                     
@@ -62,12 +69,11 @@ class Google_Login extends CI_Controller {
                 }else{
                     //insert data
                     $user_data = array(
-                        'login_oauth_uid' => $data['id'],
-                        'first_name' => $data['given_name'],
-                        'last_name' => $data['family_name'],
-                        'email_address' => $data['email'],
-                        'profile_picture' => $data['picture'],
-                        'created_at' => $current_datetime
+                        'login_oauth_uid' => $data['id'],                        
+                        'NOME' => $data['given_name']."".$data['family_name'],                        
+                        'EMAIL' => $data['email'],
+                        'STATUS' => 0,        
+                        'logged_in' => true		                
                     );
 
                     $this->google_login_model->insert_user_data($user_data);
@@ -83,20 +89,25 @@ class Google_Login extends CI_Controller {
 
             $data['link'] = $link;
 
-            $this->load->view('google_login', $data);
-        }
-
-        //$this->load->view('google_login', $data);
+            if(isset($data['given_name'])) {
+                $this->session->set_flashdata('mensagem', "Olá ".$data['given_name']."".$data['family_name']." , sua solicitação foi enviada com sucesso. Aguarde a liberação de acesso no seu e-mail: ".$email);
+			    redirect("login/mensagem");
+            }else {
+                redirect("login");
+            }
+            
+            
+        }       
 
     }
 
-    function logout(){
-        
-        //echo "deu ruim"; exit;
+    function logout(){        
+        $this->session->sess_destroy();
         $this->session->unset_userdata('access_token');
         $this->session->unset_userdata('user_data');
+        $this->session->unset_userdata('logged_in');
 
-        redirect('google_login/login');
+        redirect("Clubes");
     
     }
 

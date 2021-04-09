@@ -1,21 +1,36 @@
     
-    <div class="container">   
-        <button type="button" class="btn btn-success my-2" data-toggle="modal" data-target="#divisoesModal">
-            Incluir Novo
-        </button>    
-        <table class="table table-bordered mt-5">
-            <tr>
-                <th>#</th>              
-                <th>Divisão</th>    
-                <th>Editar/Excluir</th>               
-            </tr>
-            <?php foreach($divisoes as $divisao): ?>
+    <div class="container">  
+        <h1 class="text-center">Divisões</h1>
+        <hr> 
+        <?php if($user_data['perfil'] == 1): ?>    
+            <button type="button" class="btn btn-success my-2" data-toggle="modal" data-target="#divisoesModal">
+                <i class="fa fa-plus mr-2"></i> Incluir Novo
+            </button>    
+        <?php endif; ?>
+        <table class="table table-bordered tabela_lista mt-5">
+            <thead>
                 <tr>
-                    <td><?=$divisao->ID?></a></td>
-                    <td><?=$divisao->TITULO?></td> 
-                    <td><a data-toggle="modal" data-target="#divisoesModal" class="editar_divisao" data-divisao="<?=$divisao->ID?>"> Editar</a> - <a href="<?=base_url('admin/divisoes/excluir/'.$divisao->ID)?>">Excluir</a></td>               
+                    <th>#</th>              
+                    <th>Divisão</th>    
+                    <?php if($user_data['perfil'] == 1): ?>   
+                        <th>Editar/Excluir</th>   
+                    <?php endif; ?>           
                 </tr>
-            <?php endforeach;?>
+            </thead>
+            <tbody>
+                <?php foreach($divisoes as $divisao): ?>
+                    <tr>
+                        <td><?=$divisao->ID?></a></td>
+                        <td><?=$divisao->TITULO?></td> 
+                        <?php if($user_data['perfil'] == 1): ?>   
+                            <td>
+                                <a data-toggle="modal" data-target="#divisoesModal" class="editar_divisao  btn btn-sm btn-secondary" data-divisao="<?=$divisao->ID?>"><i class="fa fa-edit"></i></a>
+                                <a href="<?=base_url('admin/divisoes/excluir/'.$divisao->ID)?>" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                            </td>               
+                        <?php endif; ?>
+                    </tr>
+                <?php endforeach;?>
+            </tbody>            
         </table>
     </div>       
 </body>

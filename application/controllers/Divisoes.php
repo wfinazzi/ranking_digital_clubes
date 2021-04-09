@@ -11,6 +11,8 @@ class Divisoes extends CI_Controller {
         
         $this->dados['user_data'] = $user_data;	
         $this->load->vars($this->dados);
+
+        
 	}
 
 	
