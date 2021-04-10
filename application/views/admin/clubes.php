@@ -1,7 +1,7 @@
    
-    <div class="container">
+    <div class="container my-5">      
         <h1 class="text-center">Clubes</h1>
-        <hr>
+        <hr class="bg-white">
         <?php if($user_data['perfil'] == 1): ?>
             <button type="button" class="btn btn-success my-2" data-toggle="modal" data-target="#clubesModal">
                 <i class="fa fa-plus mr-2"></i>Incluir Novo
@@ -25,8 +25,8 @@
             </thead>
             <tbody>            
                 <?php foreach($clubes as $clube): ?>
-                    <tr>
-                        <td><img src="<?=base_url("img/escudos/".$clube->IMAGEM)?>" style="width:20px; height:20px;" class="mr-2"><a href="<?=base_url("clubes/clube/".$clube->ID)?>"><?=$clube->CLUBE?></a></td>
+                    <tr class="table-dark">
+                        <td><img src="<?=base_url("img/escudos/".$clube->IMAGEM)?>" style="width:20px; height:20px;" class="mr-2"><a href="<?=base_url("admin/clubes/clube/".$clube->ID)?>"><?=$clube->CLUBE?></a></td>
                         <td><?=$clube->NOME_COMPLETO?></td>
                         <td><?=$clube->DIVISAO?></td>
                         <td><?=$clube->MUNICIPIO?></td>

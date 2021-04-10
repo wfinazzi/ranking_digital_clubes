@@ -45,7 +45,7 @@ class Clubes extends CI_Controller {
         $dados['clubes_municipio'] = $this->clubes_model->getClubesMunicipio($dados['municipio']->ID);
         $dados['clubes_divisao'] = $this->clubes_model->getClubesDivisao($dados['clube']->DIVISAO);
         $dados['clubes_redes'] = $this->clubes_model->getClubesRedes($clube);   
-       
+        $dados['divisao'] = $this->clubes_model->getDivisao($dados['clube']->DIVISAO);
 
         $dados['redes_sociais'] = $this->clubes_model->getRedesSociais();
         $dados['coletas'] = $this->coletas_model->getColetasClube($clube);        

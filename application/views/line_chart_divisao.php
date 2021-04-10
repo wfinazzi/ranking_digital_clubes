@@ -51,7 +51,7 @@
                         responsive: true,
                         title: {
                             display: true,
-                            text: 'Chart.js Line Chart'
+                            text: 'Gráfico das Redes Sociais (Acumulado) mensal por divisão'
                         },
                         tooltips: {
                             mode: 'index',

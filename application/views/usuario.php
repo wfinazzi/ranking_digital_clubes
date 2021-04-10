@@ -1,4 +1,4 @@
-<div class="container conteudo">
+<div class="container conteudo my-5">
 	<?php if($this->session->flashdata('mensagem')){?>
 		<div class="alert alert-success mt-2" role="alert">
 			<?=$this->session->flashdata('mensagem') ?>
@@ -10,7 +10,7 @@
    		</div>
 	<?php } ?>
 	<h1>Candidatos</h1>
-	<table class="table bg-white table-bordered table-sm">
+	<table class="table table-bordered table-sm">
 		<thead>
 			<tr>
 				<th>Nome</th>
@@ -22,7 +22,7 @@
 		</thead>
 		<tbody>
 			<?php foreach($candidatos as $candidato): ?>
-			<tr>
+			<tr class="table-dark">
 				<form method="post" action="<?=base_url("Usuarios/usuarioPost")?>">
 					<td><?=$candidato->NOME?></td>
 					<td><?=$candidato->EMAIL?></td>					
@@ -46,7 +46,7 @@
 		</tbody>
 	</table>	
 	<h1>Usuários</h1>
-	<table class="table bg-white table-bordered table-sm">
+	<table class="table table-bordered table-sm">
 		<thead>
 			<tr>
 				<th>Nome</th>
@@ -58,7 +58,7 @@
 		</thead>
 		<tbody>
 			<?php foreach($usuarios as $usuario) : ?>
-                <tr>
+                <tr class="table-dark">
                     <td><?=$usuario->first_name."".$usuario->last_name?></td>
                     <td><?=$usuario->email_address?></td>
                     <td><?=$usuario->PERFIL_NOME?></td>

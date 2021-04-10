@@ -102,15 +102,18 @@ class Clubes extends CI_Controller {
         $dados['clubes_municipio'] = $this->clubes_model->getClubesMunicipio($dados['municipio']->ID);
         $dados['clubes_divisao'] = $this->clubes_model->getClubesDivisao($dados['clube']->DIVISAO);
         $dados['clubes_redes'] = $this->clubes_model->getClubesRedes($clube);   
-       
+        $dados['divisao'] = $this->clubes_model->getDivisao($dados['clube']->DIVISAO);
 
         $dados['redes_sociais'] = $this->clubes_model->getRedesSociais();
-        $dados['coletas'] = $this->coletas_model->getColetasClube($clube);
-        $dados['header'] = $this->load->view("template/header_admin");
-        $dados['historia'] = $this->clubes_model->getHistoria($clube);   
-        $dados['footer'] = $this->load->view("template/footer");      
+        $dados['coletas'] = $this->coletas_model->getColetasClube($clube);        
+        $dados['historia'] = $this->clubes_model->getHistoria($clube);              
 
-
+        $this->load->view("template/header_admin");
 		$this->load->view('historia',$dados);
+        $this->load->view("template/footer");
+        $this->load->view("chart");
+        $this->load->view("bar_chart");
+        $this->load->view("line_chart");
+        $this->load->view("line_chart_divisao");   
 	}
 }

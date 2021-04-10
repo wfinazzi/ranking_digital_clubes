@@ -1,30 +1,34 @@
    
-    <div class="container">        
-        <table class="table table-sm table-bordered mt-5" style="font-size:12px;">
-            <tr>
-                <th>Clube</th>
-                <th>Nome Completo</th>
-                <th>Divisão</th>
-                <th>Município</th>
-                <th>Facebook</th>
-                <th>Instagram</th>
-                <th>Youtube</th>
-                <th>Twitter</th>
-                
-            </tr>
-            
-            <?php foreach($clubes as $clube): ?>
+    <div class="container my-5">      
+        <h1 class="text-center">Clubes</h1>
+        <hr class="bg-white">  
+        <table class="table table-sm table-dark table-bordered tabela_lista my-5" style="font-size:12px;">
+            <thead>
                 <tr>
-                    <td><img src="<?=base_url("img/escudos/".$clube->IMAGEM)?>" style="width:20px; height:20px;"><a href="<?=base_url("clubes/clube/".$clube->ID)?>"><?=$clube->CLUBE?></a></td>
-                    <td><?=$clube->NOME_COMPLETO?></td>
-                    <td><?=$clube->DIVISAO?></td>
-                    <td><?=$clube->MUNICIPIO?></td>
-                    <td class="text-center"><?php if(isset($clube->LINK_FACEBOOK) && $clube->LINK_FACEBOOK !== ""):?><a href="<?=$clube->LINK_FACEBOOK?>" class="btn btn-sm btn-primary" style="font-size:12px;"><i class="fa fa-facebook"></i></a><?php endif;?></td>
-                    <td class="text-center"><?php if(isset($clube->LINK_INSTAGRAM) && $clube->LINK_INSTAGRAM !== ""):?><a href="<?=$clube->LINK_INSTAGRAM?>" class="btn btn-sm btn-warning" style="font-size:12px;"><i class="fa fa-instagram"></i></a><?php endif;?></td>
-                    <td class="text-center"><?php if(isset($clube->LINK_TWITTER) && $clube->LINK_TWITTER !== "" ):?><a href="<?=$clube->LINK_TWITTER?>" class="btn btn-sm btn-info" style="font-size:12px;"><i class="fa fa-twitter"></i></a><?php endif;?></td>
-                    <td class="text-center"><?php if(isset($clube->LINK_YOUTUBE) && $clube->LINK_YOUTUBE !== ""):?><a href="<?=$clube->LINK_YOUTUBE?>" class="btn btn-sm btn-danger" style="font-size:12px;"><i class="fa fa-youtube"></i></a><?php endif;?></td>                    
+                    <th>Clube</th>
+                    <th>Nome Completo</th>
+                    <th>Divisão</th>
+                    <th>Município</th>
+                    <th>Facebook</th>
+                    <th>Instagram</th>                    
+                    <th>Twitter</th>   
+                    <th>Youtube</th>             
                 </tr>
-            <?php endforeach;?>
+            </thead>
+            <tbody>                
+                <?php foreach($clubes as $clube): ?>
+                    <tr class="table-dark">
+                        <td><img src="<?=base_url("img/escudos/".$clube->IMAGEM)?>" style="width:20px; height:20px;" class="mr-2"><a href="<?=base_url("clubes/clube/".$clube->ID)?>"><?=$clube->CLUBE?></a></td>
+                        <td><?=$clube->NOME_COMPLETO?></td>
+                        <td><?=$clube->DIVISAO?></td>
+                        <td><?=$clube->MUNICIPIO?></td>
+                        <td class="text-center"><?php if(isset($clube->LINK_FACEBOOK) && $clube->LINK_FACEBOOK !== ""):?><a href="<?=$clube->LINK_FACEBOOK?>" class="btn btn-sm btn-primary" style="font-size:12px;" target="_blank"><i class="fa fa-facebook"></i></a><?php endif;?></td>
+                        <td class="text-center"><?php if(isset($clube->LINK_INSTAGRAM) && $clube->LINK_INSTAGRAM !== ""):?><a href="<?=$clube->LINK_INSTAGRAM?>" class="btn btn-sm btn-warning" style="font-size:12px;" target="_blank"><i class="fa fa-instagram"></i></a><?php endif;?></td>
+                        <td class="text-center"><?php if(isset($clube->LINK_TWITTER) && $clube->LINK_TWITTER !== "" ):?><a href="<?=$clube->LINK_TWITTER?>" class="btn btn-sm btn-info" style="font-size:12px;" target="_blank"><i class="fa fa-twitter"></i></a><?php endif;?></td>
+                        <td class="text-center"><?php if(isset($clube->LINK_YOUTUBE) && $clube->LINK_YOUTUBE !== ""):?><a href="<?=$clube->LINK_YOUTUBE?>" class="btn btn-sm btn-danger" style="font-size:12px;" target="_blank"><i class="fa fa-youtube"></i></a><?php endif;?></td>                    
+                    </tr>
+                <?php endforeach;?>
+            </tbody>
         </table>
     </div>     
 </body>

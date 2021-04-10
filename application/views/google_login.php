@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sign-in/">
 
         <!-- Bootstrap core CSS -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+        <link rel="stylesheet" href="<?=base_url("css/bootstrap.min.css")?>">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
 
         <!-- Custom styles for this template -->
@@ -19,13 +19,14 @@
     </head>
 
     <body class="text-center">
-        <form class="form-signin" method="post" action="<?=base_url("Login/efetuarLogin");?>">
-            <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-            <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-            <label for="inputEmail" class="sr-only">Email address</label>
-            <input type="email" id="inputEmail" class="form-control" name="email" placeholder="Email address" required autofocus>
-            <label for="inputPassword" class="sr-only">Password</label>
-            <input type="password" id="inputPassword" class="form-control" name="senha" placeholder="Password" required>                     
+        <form class="form-signin" method="post" action="<?=base_url("Login/efetuarLogin");?>">  
+            <i class="fa fa-futbol-o fa-3x my-2"></i>          
+            <h1 class="h3 mb-3 font-weight-normal">Ranking Digital dos Clubes Paulistas</h1>
+            <label for="inputEmail" class="sr-only">Endereço de Email</label>
+            <input type="email" id="inputEmail" class="form-control mt-2" name="email" placeholder="Endereço de E-mail" required autofocus>
+            <br>
+            <label for="inputPassword" class="sr-only">Senha</label>
+            <input type="password" id="inputPassword" class="form-control" name="senha" placeholder="Senha" required>                     
             <div class="panel panel-default">
             <?php if(($this->session->userdata('access_token'))){
                //print_r($this->session->userdata());
@@ -46,7 +47,7 @@
             </div>
             <a href="<?=base_url("login/solicitar_acesso")?>" >Não sou cadastrado ainda. Cadastrar ?</a><br>
             <button class="btn btn-lg btn-primary btn-block" type="submit"><i class="fa fa-arrow-right"></i> Acessar</button>
-            <a href="<?=$link?>" class="btn btn-lg btn-danger btn-block">Google Login</a>            
+            <a href="<?=$link?>" class="btn btn-lg btn-danger btn-block"><i class="fa fa-google"></i> Google Login</a>            
             <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
         </form>
     </body>

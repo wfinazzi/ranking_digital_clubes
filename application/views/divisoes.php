@@ -1,16 +1,24 @@
     
-    <div class="container">        
-        <table class="table table-bordered mt-5">
-            <tr>
-                <th>#</th>              
-                <th>Divisão</th>                             
-            </tr>
-            <?php foreach($divisoes as $divisao): ?>
+    <div class="container my-5"> 
+        <h1 class="text-center">Divisões</h1>
+        <hr class="bg-white">    
+        <table class="table table-bordered tabela_lista mt-5" style="color:#ffffff;">
+            <thead>
                 <tr>
-                    <td><?=$divisao->ID?></a></td>
-                    <td><?=$divisao->TITULO?></td>                    
+                    <th>#</th>              
+                    <th>Divisão</th>                             
                 </tr>
-            <?php endforeach;?>
+            </thead>
+            <tbody >
+                <?php foreach($divisoes as $divisao): ?>
+                    <tr class="table-dark">
+                        <td><?=$divisao->ID?></a></td>
+                        <td><?=$divisao->TITULO?></td>                    
+                    </tr>
+                <?php endforeach;?>
+            </tbody>      
         </table>
     </div>       
 </body>
+
+

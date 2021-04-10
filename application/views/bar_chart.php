@@ -54,7 +54,7 @@
                     options: {
                         title: {
                             display: true,
-                            text: 'Chart.js Bar Chart - Stacked'
+                            text: 'Gráfico das Redes Sociais (Acumulado) por mês'
                         },
                         tooltips: {
                             mode: 'index',

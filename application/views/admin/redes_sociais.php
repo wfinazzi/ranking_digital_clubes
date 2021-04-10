@@ -1,7 +1,7 @@
 
-    <div class="container">  
+    <div class="container my-5">  
         <h1 class="text-center">Redes Sociais</h1>
-        <hr>  
+        <hr class="bg-white">     
         <?php if($user_data['perfil'] == 1): ?>   
             <button type="button" class="btn btn-success my-2" data-toggle="modal" data-target="#redesModal">
                 <i class="fa fa-plus mr-2"></i> Incluir Novo
@@ -17,7 +17,7 @@
             </thead>
             <tbody>
                 <?php foreach($redes_sociais as $rede): ?>
-                    <tr>
+                    <tr class="table-dark">
                         <td><?=$rede->ID?></td>
                         <td><?=$rede->NOME?></td>  
                         <?php if($user_data['perfil'] == 1): ?>  

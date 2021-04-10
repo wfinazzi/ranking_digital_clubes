@@ -1,7 +1,7 @@
     
-    <div class="container">  
+    <div class="container my-5"> 
         <h1 class="text-center">Divisões</h1>
-        <hr> 
+        <hr class="bg-white">
         <?php if($user_data['perfil'] == 1): ?>    
             <button type="button" class="btn btn-success my-2" data-toggle="modal" data-target="#divisoesModal">
                 <i class="fa fa-plus mr-2"></i> Incluir Novo
@@ -19,7 +19,7 @@
             </thead>
             <tbody>
                 <?php foreach($divisoes as $divisao): ?>
-                    <tr>
+                    <tr class="table-dark">
                         <td><?=$divisao->ID?></a></td>
                         <td><?=$divisao->TITULO?></td> 
                         <?php if($user_data['perfil'] == 1): ?>   

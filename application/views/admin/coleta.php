@@ -1,11 +1,11 @@
-    <div class="container">
+    <div class="container my-5">
         
-        <button type="button" class="btn btn-success my-2" data-toggle="modal" data-target="#clubesModal">
+        <!-- <button type="button" class="btn btn-success my-2" data-toggle="modal" data-target="#clubesModal">
             <i class="fa fa-plus mr-2"></i> Incluir Novo
-        </button> 
+        </button>  -->
 
         <h1 class="text-center">Coleta - <?=Nome_Do_Mes($coleta->MES)?> de <?=$coleta->ANO?></h1>         
-
+        <hr class="bg-white">
         <?php foreach($divisoes as $div): ?>
             <a class="btn btn-secondary" href="<?=base_url('admin/Coletas/coleta/'.$coleta->ID."/".$div->ID)?>"><?=$div->TITULO;?></a>            
         <?php endforeach; ?>    
